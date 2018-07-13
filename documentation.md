@@ -1,61 +1,61 @@
-#QR Code API#
+# QR Code API
 
-##Request##
+## Request
 
 The API base URL is: `http://api.qrcode.unitag.fr/api`
 
 A QR Code API request is based on these following primary parameters:
 
-##Parameters##
+## Parameters
 
-###t_pwd (required)
+### t_pwd (required)
 Provide the authentication for your account.
 
 Values:
 - To obtain a token please create an account on Unitag's platform and contact the Unitag Team.
 - You can set `degraded` as value for tests (the answer received will be limited to a PNG format image of 200px size).
 
-###T (optional)
+### T (optional)
 Change the image format received.
 
 Values: `SVG`, `PDF`, `PNG`, `JPEG`.
 
-###stored (optional)
+### stored (optional)
 Store the QR Code in your Unitag Dashboard.
 
 Values: If needed, set value to `true`.
 
-###SIZE (optional)
+### SIZE (optional)
 Change the image size in pixels.
 
 Values : integer between 0 and 3,000
 
-###setting (required)
+### setting (required)
 Send custom parameters to your QR Code design.
 
 The setting parameter value is JSON formated and contains all QR Code customizations parameters. See description and examples below
 
 Can be replaced by the templateId parameter.
 
-###data (required)
+### data (required)
 Send QR Code data.
 
 The data parameter value is JSON formated and contains all QR Code encoded data. See description and examples below.
 
-###templateId (optional)
+### templateId (optional)
 The parameter templateId can replace the parameter setting in order to indicate a Unitag Template to use as a design.
 
 Values : If needed, set value to the targeted template id Integer.
 
 
-##Data object##
-
+## Data object
+```js
 	data = {
 		"TYPE" : "",
 		"DATA" : {}
 	}
-
-###"Type" - STRING###
+```
+## "Type" - STRING 
 
 * url
 * text
@@ -67,28 +67,28 @@ Values : If needed, set value to the targeted template id Integer.
 * calendar
 * call
 
-###"data" - OBJECT###
+## "data" - OBJECT
 
 **Type : url**
-
+```js
 	data = {
 		"TYPE" : "url",
 		"DATA" : {
 			"URL" : ""
 		}
 	}
-
+```
 **Type : text**
-
+```js
 	data = {
 		"TYPE" : "text",
 		"DATA" : {
 			"TEXT" : ""
 		}
 	}
-
+```
 **Type : geoloc**
-
+```js
 	data : {
 		"TYPE" : "geoloc",
 		"DATA" : {
@@ -96,9 +96,9 @@ Values : If needed, set value to the targeted template id Integer.
 			"LONG" : ""
 		}
 	}
-
+```
 **Type : smsto**
-
+```js
 	data = {
 		"TYPE" : "smsto",
 		"DATA" : {
@@ -106,9 +106,9 @@ Values : If needed, set value to the targeted template id Integer.
 			"MESSAGE" : ""
 		}
 	}
-
+```
 **Type : wifi**
-
+```js
 	data = {
 		"TYPE" : "wifi",
 		"DATA" : {
@@ -117,9 +117,9 @@ Values : If needed, set value to the targeted template id Integer.
 			"PASSWORD" : ""
 		}
 	}
-	
+```	
 **Type : vcard**
-
+```js
 	data = {
 		"TYPE" : "vcard",
 		"DATA" : {
@@ -139,10 +139,10 @@ Values : If needed, set value to the targeted template id Integer.
 			"COUNTRY" : ""
 		}
 	}
-	
+```	
 
 **Type : email**
-
+```js
 	data = {
 		"TYPE" : "email",
 		"DATA" : {
@@ -151,9 +151,9 @@ Values : If needed, set value to the targeted template id Integer.
 			"EMAIL_CORPS" : ""
 		}
 	}
-
+```
 **Type : calendar**
-
+```js
 	data = {
 		"TYPE" : "calendar",
 		"DATA" : {
@@ -163,10 +163,10 @@ Values : If needed, set value to the targeted template id Integer.
 			"DATE_FIN" : ""
 		}
 	}
-*LIEU : Place ; DATE_DEBUT : Start date ; DATE_FIN ; End date*
-	
+	//LIEU : Place ; DATE_DEBUT : Start date ; DATE_FIN ; End date*
+```	
 **Type : call**
-
+```js
 	data = {
 		"TYPE" : "call",
 		"DATA" : {
@@ -174,9 +174,9 @@ Values : If needed, set value to the targeted template id Integer.
 		}
 	}
 
-
-##Setting object##
-
+```
+## Setting object
+```js
 	setting = {
 		"LAYOUT" : {},
 		"EYES" : {},
@@ -187,11 +187,11 @@ Values : If needed, set value to the targeted template id Integer.
 		"ARRONDI" : INT,
 		"QUIET_ZONE" : BOOLEAN
 	}
-
+```
 *ARRONDI : Radius*
 	
-###LAYOUT - OBJECT###
-
+### LAYOUT - OBJECT
+```js
 	LAYOUT : {
 		"GRADIENT_TYPE" : "",
 		"COLOR1" : "",
@@ -207,7 +207,7 @@ Values : If needed, set value to the targeted template id Integer.
 		"Y_SHADOW" : INT,
 		"FORCE_SHADOW" : ""
 	}
-	
+```	
 **GRADIENT_TYPE - STRING - mandatory**
 
 * From up to down : "HORI"
@@ -235,8 +235,8 @@ _Note: FORCE_SHADOW is a shortcut for X_SHADOW/Y_SHADOW_
 * "S" : Strong (value is 10)
 
 
-###EYES###
-
+### EYES
+```js
 	"EYES" : {
 		"COLOR_EHG" : "",
 		"COLOR_EHD" : "",
@@ -246,7 +246,7 @@ _Note: FORCE_SHADOW is a shortcut for X_SHADOW/Y_SHADOW_
 		"COLOR_IB" : "",
 		"EYE_TYPE" : ""
 	}
-
+```
 **EYE_TYPE**
 
 * Square: "Simple"
@@ -266,8 +266,8 @@ _Note: FORCE_SHADOW is a shortcut for X_SHADOW/Y_SHADOW_
 * Sharp "Sharp"
 * Curved "ECurve_ICurve"
 	
-###LOGO###
-	
+### LOGO
+```js
 	"LOGO" : {
 		"L_NAME" : "",
 		"L_X_Norm" : FLOAT,
@@ -276,25 +276,25 @@ _Note: FORCE_SHADOW is a shortcut for X_SHADOW/Y_SHADOW_
 		"L_LENGTH" : FLOAT,
 		"EXCAVATE" : BOOLEAN
 	}
-
+```
 **L_X_Norm & L_Y_Norm**
 
 The upper corner of the logo in the QR Code as a percentage. Omit to have it centered.
 
 
-###BACKGROUND###
-
+### BACKGROUND
+```js
 	"BACKGROUND" : {
 		"IMAGE_BACKGROUND" : "",
 		"ENLIGHTMENT" : FLOAT,
 		"CONTRAST" : FLOAT
 	}
-
+```
 **ENLIGHTMENT & CONTRAST - float**
 
 0 <= x <= 2	
 		
-###E - STRING###
+### E - STRING
 
 QR Code redundancy : 
 
@@ -303,7 +303,7 @@ QR Code redundancy :
 * Quality : "Q"
 * Strong : "H"
 
-###BODY_TYPE - INT###
+### BODY_TYPE - INT
 
 Modules look : 
 
@@ -320,14 +320,14 @@ Modules look :
 * Rectangular : 8
 
 
-###ARRONDI - INT###
+### ARRONDI - INT
 
 0 <= x <= 10
 
-###TEXT###
+### TEXT
 
 Use this module to add text under the QR Code
-
+```js
 	"TEXT" : {
 		"LABEL" : String,
 		"COLOR" : 000000,
@@ -339,7 +339,7 @@ Use this module to add text under the QR Code
 		"QRMARGIN" : int,
 		"SPACING" : int
 	}
-	
+```	
 		
 * LABEL : put \n for new lines		
 * POSITION : CENTER, LEFT, RIGHT or AUTO ( ie resize to take maximum space beneath the QR Code )
